@@ -3,7 +3,6 @@ package com.mati.techforbchallenge.controllers;
 import com.mati.techforbchallenge.entities.Usuario;
 import com.mati.techforbchallenge.services.UsuarioService;
 import jakarta.transaction.Transactional;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +29,11 @@ public class UsuarioController {
     @PutMapping("/actualizar")
     public ResponseEntity<?> updateUser(@RequestBody Usuario usuario) {
         return this.usuarioService.updateUser(usuario);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        this.usuarioService.deleteUser(id);
     }
 
 }

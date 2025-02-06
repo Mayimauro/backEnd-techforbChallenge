@@ -20,6 +20,11 @@ public class UsuarioServiceManager implements UsuarioService {
     }
 
     @Override
+    public Usuario findById(Long id) {
+        return usuarioRepository.findById(id).get();
+    }
+
+    @Override
     public Usuario save(Usuario usuario) {
         return this.usuarioRepository.save(usuario);
     }
@@ -44,13 +49,23 @@ public class UsuarioServiceManager implements UsuarioService {
 
         if (isUpdated) {
             usuarioRepository.save(usuarioAux);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("Usuario actualizado correctamente");
+            return ResponseEntity.status(HttpStatus.OK).body("Usuario actualizado correctamente");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
-                    .body("No hubo cambios en el usuario");
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("No hubo cambios en el usuario");
         }
 
+    }
+
+    @Override
+    public ResponseEntity<?> deleteUser(Long id) {
+
+        Usuario usuario = this.usuarioRepository.findById(id).get();
+
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        }
+        usuarioRepository.delete(usuario);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuario eliminado correctamente");
 
     }
 
