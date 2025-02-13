@@ -1,51 +1,65 @@
 package com.mati.techforbchallenge.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "usuarios", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+public class Usuario implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombreUsuario;
-    private String contrasena;
+    @Column(nullable = false)
+    private String username;
+    private String password;
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public Usuario() {}
 
-    public Usuario(String nombreUsuario, String contrasena, String email) {
-        this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.email = email;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
