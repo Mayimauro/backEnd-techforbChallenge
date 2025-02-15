@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Permite el acceso desde Angular
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/plantas")
 @RequiredArgsConstructor
 public class plantaController {
@@ -27,8 +27,8 @@ public class plantaController {
     }
 
     @PostMapping
-    public Planta guardarPlanta(@RequestBody Planta tarjeta) {
-        return plantaService.guardarPlanta(tarjeta);
+    public Planta guardarPlanta(@RequestBody Planta planta) {
+        return plantaService.guardarPlanta(planta);
     }
 
     @DeleteMapping("/{id}")

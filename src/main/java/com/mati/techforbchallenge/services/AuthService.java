@@ -4,7 +4,7 @@ import com.mati.techforbchallenge.controllers.AuthResponse;
 import com.mati.techforbchallenge.controllers.LoginRequest;
 import com.mati.techforbchallenge.controllers.RegisterRequest;
 import com.mati.techforbchallenge.entities.Role;
-import com.mati.techforbchallenge.entities.UserRepository;
+import com.mati.techforbchallenge.repositories.UserRepository;
 import com.mati.techforbchallenge.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,6 +1,6 @@
 package com.mati.techforbchallenge.config;
 
-import com.mati.techforbchallenge.entities.UserRepository;
+import com.mati.techforbchallenge.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

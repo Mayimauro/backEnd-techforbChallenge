@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface plantaRepository extends JpaRepository<Planta,Long> {
 
-
 }

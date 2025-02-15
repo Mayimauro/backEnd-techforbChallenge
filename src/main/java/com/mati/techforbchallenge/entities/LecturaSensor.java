@@ -16,13 +16,9 @@ public class LecturaSensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Double valor;
-    private LocalDateTime fechaHora;
-
     @Enumerated(EnumType.STRING)
     private NivelAlerta nivelAlerta;
-
     @ManyToOne
     @JoinColumn(name = "sensor_id", nullable = false)
     private Sensor sensor;
